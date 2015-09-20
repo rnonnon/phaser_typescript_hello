@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 var ts = require('gulp-typescript');
+var watch = require('gulp-watch');
 
 gulp.task('typescriptCompile', function(){
 	var tsResult = gulp.src('app/typescript/*.ts')
@@ -13,7 +14,6 @@ gulp.task('typescriptCompile', function(){
 
 gulp.task('connect', function() {
   connect.server({
-    root: '.',
     livereload: true
   });
 });
@@ -24,8 +24,12 @@ gulp.task('html', function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch(['./app/typescript/*.ts'], ['typescriptCompile']);
-  gulp.watch(['./app/*.html'], ['html']);
+  watch(['./app/typescript/*.ts'], function() {
+    gulp.start('typescriptCompile');
+  });
+  watch(['./app/*.html'], function() {
+    gulp.start('html');
+  });
 });
  
 gulp.task('default', ['typescriptCompile', 'connect', 'watch']);
