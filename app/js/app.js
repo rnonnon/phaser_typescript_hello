@@ -105,12 +105,16 @@ var Castlevania;
         __extends(Player, _super);
         function Player(game, x, y) {
             _super.call(this, game, x, y, 'simon', 0);
+            this.game = game;
             this.anchor.setTo(0.5, 0);
             this.animations.add('walk', [0, 1, 2, 3, 4], 10, true);
+            game.physics.enable(this);
+            this.body.gravity.y = 300;
             game.add.existing(this);
         }
         Player.prototype.update = function () {
             this.body.velocity.x = 0;
+            this.body.collideWorldBounds = true;
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
                 this.body.velocity.x = -150;
                 this.animations.play('walk');
@@ -124,6 +128,10 @@ var Castlevania;
                 if (this.scale.x == -1) {
                     this.scale.x = 1;
                 }
+            }
+            else if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP) && this.body.onFloor()) {
+                this.body.velocity.y = -350;
+                this.game.score += 1;
             }
             else {
                 this.animations.frame = 0;
@@ -147,6 +155,10 @@ var Castlevania;
             this.music = this.add.audio('music', 1, false);
             this.music.play();
             this.player = new Castlevania.Player(this.game, 130, 284);
+            this.text = this.add.text(0, 0, "Score: " + this.game.score, { fill: "white", backgroundColor: "black" });
+        };
+        Level1.prototype.update = function () {
+            this.text.setText("Score: " + this.game.score);
         };
         return Level1;
     })(Phaser.State);
@@ -163,10 +175,12 @@ var Castlevania;
         __extends(Game, _super);
         function Game() {
             _super.call(this, 800, 600, Phaser.AUTO, 'game', null);
+            this.score = 0;
             this.state.add('Boot', Castlevania.Boot);
             this.state.add('Preloader', Castlevania.Preloader);
             this.state.add('MainMenu', Castlevania.MainMenu);
             this.state.add('Level1', Castlevania.Level1);
+            this.physics = Phaser.Physics.ARCADE;
             this.state.start('Boot');
         }
         return Game;
