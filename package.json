@@ -1,7 +1,7 @@
 {
   "name": "phaser_typescript_hello",
   "version": "1.0.0",
-  "description": "*************************\r *********REaDmE**********\r *************************",
+  "description": "",
   "main": "gulpfile.js",
   "dependencies": {
     "bower": "^1.5.2",

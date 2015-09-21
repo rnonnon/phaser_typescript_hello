@@ -14,6 +14,7 @@ gulp.task('typescriptCompile', function(){
 
 gulp.task('connect', function() {
   connect.server({
+    port: 8001,
     livereload: true
   });
 });

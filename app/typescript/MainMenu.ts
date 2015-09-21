@@ -37,7 +37,7 @@ module Castlevania {
         startGame(){
             this.music.stop();
             this.music.destroy();
-            this.game.state.start("Level1")
+            this.game.state.start("Level1");
         }
 
     }
