@@ -40,16 +40,15 @@ module Castlevania {
                     this.scale.x = 1;
                 }
             }
-            //  Allow the player to jump if they are touching the ground.
-            else if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP) && this.body.onFloor()) {
-                this.body.velocity.y = -350;
-                this.game.score += 1;
-            }
             else {
                 this.animations.frame = 0;
             }
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP) && this.body.onFloor()) {
+               this.body.velocity.y = -350;
+                this.game.score += 1;
+           }
  
-        }
+       }
  
     }
  

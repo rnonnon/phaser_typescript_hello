@@ -14,8 +14,6 @@ module Castlevania {
             this.state.add('MainMenu', MainMenu);
             this.state.add('Level1', Level1);
 
-            this.physics = Phaser.Physics.ARCADE;
-
             this.state.start('Boot');
         }
     }

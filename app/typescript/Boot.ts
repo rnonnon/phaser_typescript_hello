@@ -18,6 +18,7 @@ module Castlevania {
             else {
                 //  Same goes for mobile settings.
             }
+            this.game.physics.startSystem(Phaser.Physics.ARCADE);
             this.game.state.start('Preloader', true);
  
         }
