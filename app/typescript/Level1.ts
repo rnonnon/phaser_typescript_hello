@@ -20,8 +20,14 @@ module Castlevania {
             ground.scale.x = this.game.world.width;
             ledges.push(ground);
             
-            var ledge = this.add.sprite(0, 150);
+            var ledge = this.add.sprite(0, 190);
+            ledge.scale.x = 12;
+            ledge.height = 10;
+            ledges.push(ledge);
+
+            ledge = this.add.sprite(500, 190);
             ledge.scale.x = 10;
+            ledge.height = 10;
             ledges.push(ledge);
             
             this.game.physics.enable(ledges);
@@ -41,7 +47,9 @@ module Castlevania {
         }
 
         update() {
-            this.game.physics.arcade.collide(this.player, this.platforms);
+            this.game.physics.arcade.collide(this.player, this.platforms, null, (player:Phaser.Sprite) => {
+                return (player.deltaY > 0);
+            });
             this.text.setText("Score: " + this.game.score);
         }
     }

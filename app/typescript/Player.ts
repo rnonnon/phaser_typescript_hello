@@ -45,7 +45,7 @@ module Castlevania {
             }
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP) && this.body.touching.down) {
                this.body.velocity.y = -350;
-                this.game.score += 1;
+               this.game.score += 1;
            }
  
        }
