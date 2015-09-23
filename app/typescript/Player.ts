@@ -2,7 +2,7 @@
 module Castlevania {
  
     export class Player extends Phaser.Sprite {
- 
+        public collisionEnable:boolean;
         constructor(public game: Castlevania.Game, x: number, y: number) {
  
             super(game, x, y, 'simon', 0);
@@ -18,7 +18,6 @@ module Castlevania {
         }
  
         update() {
- 
             this.body.velocity.x = 0;
             this.body.collideWorldBounds = true;
 
@@ -42,6 +41,12 @@ module Castlevania {
             }
             else {
                 this.animations.frame = 0;
+            }
+            if (this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
+                this.collisionEnable = false;
+            }
+            else {
+                this.collisionEnable = true;
             }
             if (this.game.input.keyboard.isDown(Phaser.Keyboard.UP) && this.body.touching.down) {
                this.body.velocity.y = -350;
